@@ -1,4 +1,4 @@
-export abstract class Conta  {
+export  abstract class Conta  {
 
     private _numero: number;
     private _agencia: number;
@@ -6,7 +6,7 @@ export abstract class Conta  {
     private _titular: string;
     private _saldo: number;
 
-    constructor(numero: number, agencia: number, tipo: number, titular: string, saldo: number) {
+    constructor(numero: number, agencia: number, tipo: number, titular: string, saldo: number,) {
         this._numero = numero;
         this._agencia = agencia;
         this._tipo = tipo;
@@ -95,7 +95,6 @@ public visualizar(): void {
 
     }
 
-
     console.log("\n\n**********************************************");
     console.log("Dados da Conta:");
     console.log("************************************************");
@@ -105,5 +104,7 @@ public visualizar(): void {
     console.log("Titular: " + this._titular);
     console.log("Saldo: " + this._saldo.toFixed(2));
     
+
      }
 }
+

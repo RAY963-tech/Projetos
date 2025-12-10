@@ -1,7 +1,8 @@
 
 
 import readlinesync = require("readline-sync");
-
+import { ContaPoupanca } from "./model/ContaPoupanca";
+import { ContaCorrente } from "./model/ContaCorrente";
 
 export function main() {
 
