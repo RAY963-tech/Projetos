@@ -1,4 +1,4 @@
-export abstract class Conta  {
+export abstract class Conta {
 
     private _numero: number;
     private _agencia: number;
@@ -10,100 +10,72 @@ export abstract class Conta  {
         this._numero = numero;
         this._agencia = agencia;
         this._tipo = tipo;
-        this._titular =  titular;
+        this._titular = titular;
         this._saldo = saldo;
-}
-
-public get numero() {
-    return this._numero;
-
-}
-
-public set numero(numero: number) {
-    this._numero = numero;
-}
-
-public get agencia() {
-    return this._agencia;
-
-}
-
-public set agencia(agencia: number) {
-    this._agencia = agencia;
-
-}
-
-public get tipo() {
-    return this._tipo;
-
-}
-
-public set tipo(tipo: number) {
-    this._tipo = tipo;
-
-}
-
-public get titular() {
-    return this._titular;
-
-}
-
-public set titular(titular: string) {
-    this._titular = titular;
-
-}
-
-public get saldo() {
-    return this._saldo;
-
-}
-
-public set saldo(saldo: number) {
-    this._saldo = saldo;
-
-}
-
-public sacar(valor: number): boolean {
-
-
-    if (this._saldo < valor) {
-        console.log("\n Saldo Insuficiente!");
-        return false;
     }
 
-    this._saldo = this._saldo - valor;
-    return true;
-}
-
-public depositar(valor: number): void {
-    this._saldo = this._saldo + valor;
-
-}
-  
-public visualizar(): void {
-
-    let tipo: string ="";
-
-
-    switch (this._tipo) {
-        case 1:
-            tipo = "Conta Corrente";
-            break;
-        case 2:
-            tipo = "Conta Poupança";
-            break;    
-
+    public get numero(): number {
+        return this._numero;
     }
 
+    public get agencia(): number {
+        return this._agencia;
+    }
 
-    console.log("\n\n**********************************************");
-    console.log("Dados da Conta:");
-    console.log("************************************************");
-    console.log("Numero da Conta: "+ this._numero);
-    console.log("Agência: " + this._agencia);
-    console.log("Tipo da Conta: " + tipo);
-    console.log("Titular: " + this._titular);
-    console.log("Saldo: " + this._saldo.toFixed(2));
-    
-     }
+    public get tipo(): number {
+        return this._tipo;
+    }
+
+    public get titular(): string {
+        return this._titular;
+    }
+
+    public get saldo(): number {
+        return this._saldo;
+    }
+
+    protected set saldo(valor: number) {
+        this._saldo = valor;
+    }
+
+    public sacar(valor: number): boolean {
+        if (this._saldo < valor) {
+            console.log("\nSaldo Insuficiente!");
+            return false;
+        }
+
+        this._saldo -= valor;
+        return true;
+    }
+
+    public depositar(valor: number): void {
+        this._saldo += valor;
+    }
+
+    public transferir(valor: number, contaDestino: Conta): void {
+        if (this.sacar(valor)) {
+            contaDestino.depositar(valor);
+        }
+    }
+
+    public visualizar(): void {
+        let tipoConta = "";
+
+        switch (this._tipo) {
+            case 1:
+                tipoConta = "Conta Corrente";
+                break;
+            case 2:
+                tipoConta = "Conta Poupança";
+                break;
+        }
+
+        console.log("\n**********************************************");
+        console.log("Dados da Conta:");
+        console.log("Número: " + this._numero);
+        console.log("Agência: " + this._agencia);
+        console.log("Tipo: " + tipoConta);
+        console.log("Titular: " + this._titular);
+        console.log("Saldo: R$ " + this._saldo.toFixed(2));
+    }
 }
